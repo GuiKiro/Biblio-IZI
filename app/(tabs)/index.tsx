@@ -30,9 +30,9 @@ export default function TabOneScreen() {
       {/* CARD DO LIVRO CLICÁVEL COM CORES ADAPTADAS */}
       <TouchableOpacity style={[styles.cardLivro, { backgroundColor: tema.cardBg, borderColor: tema.borda }]} onPress={irParaDetalhes}>
         <Image 
-          source={{ uri: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=300&auto=format&fit=crop' }} 
+          source={require('../../assets/images/capa.png')} 
           style={styles.capaLivro} 
-        />
+          />
         <View style={styles.infoLivro}>
           <Text style={[styles.tituloLivro, { color: tema.texto }]}>Tokyo Ghoul - Vol. 1</Text>
           <Text style={[styles.autorLivro, { color: tema.subtexto }]}>Sui Ishida</Text>

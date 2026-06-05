@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator, Alert, Linking } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator, Alert, Linking, Image } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useUsuario } from './_layout'; // Puxa o tema global da raiz
@@ -25,10 +25,10 @@ export default function DetalhesLivro() {
         "O volume 1 de Tokyo Ghoul foi salvo com sucesso no seu dispositivo virtual.",
         [
           { 
-            text: "Ler Agora (Simulação)", 
+            text: "Ler Agora (Abrir PDF)", 
             onPress: () => {
-              // Paliativo extra: Abre uma busca ou o link oficial de leitura caso queira mostrar algo real
-              Linking.openURL('https://mangalivre.biz/manga/tokyo-ghoul/1114');
+              // 📱 Abre o link real do Google Drive fornecido
+              Linking.openURL('https://drive.google.com/file/d/1NSsLaH12DdnK6K-YafzY5uGSS8pB6Eyc/view?usp=sharing');
             }
           },
           { text: "Fechar", style: "cancel" }
@@ -42,10 +42,11 @@ export default function DetalhesLivro() {
   return (
     <View style={[styles.container, { backgroundColor: tema.bg }]}>
       
-      {/* Ícone grande ilustrativo do livro */}
-      <View style={[styles.capaMock, { backgroundColor: tema.cardBg, borderColor: tema.borda }]}>
-        <Ionicons name="book" size={80} color="#007AFF" />
-      </View>
+      {/* Capa Real do Livro vinda da pasta assets */}
+      <Image 
+        source={require('../assets/images/capa.png')} 
+        style={styles.capaGrande} 
+      />
 
       <Text style={[styles.titulo, { color: tema.texto }]}>{titulo}</Text>
       <Text style={[styles.autor, { color: tema.subtexto }]}>Autor: Sui Ishida</Text>
@@ -87,7 +88,17 @@ const estilosEscuros = { bg: '#121212', cardBg: '#1E1E1E', texto: '#FFF', subtex
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24, alignItems: 'center', justifyContent: 'center' },
-  capaMock: { width: 140, height: 200, borderRadius: 12, borderWidth: 1, justifyContent: 'center', alignItems: 'center', marginBottom: 20, elevation: 3 },
+  capaGrande: { 
+    width: 150, 
+    height: 220, 
+    borderRadius: 12, 
+    marginBottom: 20,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
   titulo: { fontSize: 22, fontWeight: 'bold', textAlign: 'center' },
   autor: { fontSize: 15, marginTop: 4, marginBottom: 20 },
   boxDescricao: { padding: 16, borderRadius: 12, borderWidth: 1, marginBottom: 30, width: '100%' },
